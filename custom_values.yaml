@@ -40,7 +40,7 @@ image:
 # Exporter Docker image
 # https://github.com/kumina/postfix_exporter
 exporter:
-  enabled: true
+  enabled: false
   image:
     repository: eldada.jfrog.io/docker/postfix-exporter
     tag: 0.2
@@ -58,7 +58,7 @@ exporter:
 # Must have exporter.enabled=true
 serviceMonitor:
   # Enable only if you have support for ServiceMonitor object with version monitoring.coreos.com/v1 (Prometheus)
-  enabled: true
+  enabled: false
 
 # Expose pods with service on port 25
 service:
