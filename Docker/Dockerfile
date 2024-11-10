@@ -1,6 +1,6 @@
 FROM alpine:3.17.2
 
-MAINTAINER Eldad Assis <eldad.assis@gmail.com>
+LABEL org.opencontainers.image.authors="Christopher Jenkins <github@seajay.com>"
 
 # Install postfix and supervisor
 RUN apk add --no-cache \

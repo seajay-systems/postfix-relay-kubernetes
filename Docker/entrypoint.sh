@@ -21,6 +21,23 @@ echo "${TX_SMTP_RELAY_HOST} ${TX_SMTP_RELAY_USERNAME}:${TX_SMTP_RELAY_PASSWORD}"
 postmap /etc/postfix/sasl_passwd || exit 1
 rm /etc/postfix/sasl_passwd || exit 1
 
+#CPJ Write transport file
+echo "seajay.com    smtp:smtp.seajay.com" > /etc/postfix/transport || exit 1
+postmap /etc/postfix/transport || exit 1
+rm /etc/postfix/transport || exit 1
+
+#CPJ Write relay_recipients file
+echo "chrisj@seajay.com       x" > /etc/postfix/relay_recipients || exit 1
+echo "cpjenkins@seajay.com    x" >> /etc/postfix/relay_recipients || exit 1
+echo "twinked@seajay.com      x" >> /etc/postfix/relay_recipients || exit 1
+echo "hostmaster@seajay.com   x" >> /etc/postfix/relay_recipients || exit 1
+echo "github@seajay.com       x" >> /etc/postfix/relay_recipients || exit 1
+echo "spam@seajay.com         x" >> /etc/postfix/relay_recipients || exit 1
+echo "chrisj@jenk.com         x" >> /etc/postfix/relay_recipients || exit 1
+echo "chrisj@denn.com         x" >> /etc/postfix/relay_recipients || exit 1
+postmap /etc/postfix/relay_recipients || exit 1
+#rm /etc/postfix/relay_recipients || exit 1
+
 # Set configurations
 postconf 'smtp_sasl_auth_enable = yes' || exit 1
 postconf 'smtp_sasl_password_maps = lmdb:/etc/postfix/sasl_passwd' || exit 1
@@ -29,6 +46,14 @@ postconf 'smtpd_tls_CAfile = /etc/ssl/certs/ca-certificates.crt' || exit 1
 postconf "relayhost = ${TX_SMTP_RELAY_HOST}" || exit 1
 postconf "myhostname = ${TX_SMTP_RELAY_MYHOSTNAME}" || exit 1
 postconf "mynetworks = ${TX_SMTP_RELAY_NETWORKS}" || exit 1
+
+#CPJ Add the transports file
+postconf 'transport_maps = hash:/etc/postfix/transport' || exit 1
+
+#CPJ Add the relay_recipients and relay_domains
+postconf 'relay_recipients = hash:/etc/postfix/relay_recipients' || exit 1
+postconf 'relay_domains = seajay.com denn.com jenk.com' || exit 1
+postconf 'myorigin = seajay.com' || exit 1
 
 # http://www.postfix.org/COMPATIBILITY_README.html#smtputf8_enable
 postconf 'smtputf8_enable = no' || exit 1
