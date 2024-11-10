@@ -48,10 +48,10 @@ postconf "myhostname = ${TX_SMTP_RELAY_MYHOSTNAME}" || exit 1
 postconf "mynetworks = ${TX_SMTP_RELAY_NETWORKS}" || exit 1
 
 #CPJ Add the transports file
-postconf 'transport_maps = hash:/etc/postfix/transport' || exit 1
+postconf 'transport_maps = lmdb:/etc/postfix/transport' || exit 1
 
 #CPJ Add the relay_recipients and relay_domains
-postconf 'relay_recipients = hash:/etc/postfix/relay_recipients' || exit 1
+postconf 'relay_recipients = lmdb:/etc/postfix/relay_recipients' || exit 1
 postconf 'relay_domains = seajay.com denn.com jenk.com' || exit 1
 postconf 'myorigin = seajay.com' || exit 1
 
