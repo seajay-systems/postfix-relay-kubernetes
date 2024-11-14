@@ -62,7 +62,7 @@ serviceMonitor:
 
 # Expose pods with service on port 25
 service:
-  type: NodePort
+  type: ClusterIP
   port: 25
   exporterPort: 9154
   loadBalancerIP:
