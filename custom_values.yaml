@@ -72,7 +72,7 @@ service:
 smtp:
   # Example with mailgun
   relayHost: "[njlinmail01.seajay.com]:465"
-  relayMyhostname: smtp.seajay.com
+  relayMyhostname: postfix.seajay.com
   relayUsername: relayuser
   relayPassword: relaypassword
   relayNetworks: '10.0.0.0/8,127.0.0.0/8,172.17.0.0/16,192.0.0.0/8'
